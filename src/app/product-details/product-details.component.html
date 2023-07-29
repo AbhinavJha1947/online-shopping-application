@@ -1,0 +1,15 @@
+<p>product-details works!</p>
+  
+  <!-- product-details.component.html -->
+
+<div *ngIf="product; else loading">
+    <h2>{{ product?.name }}</h2>
+    <p>Price: ${{ product?.price }}</p>
+    <p>{{ product?.description }}</p>
+    <img *ngIf="product?.image" [src]="'assets/' + product?.image" alt="{{ product?.name }}">
+  </div>
+  
+  <ng-template #loading>
+    <p>Loading...</p>
+  </ng-template>
+  

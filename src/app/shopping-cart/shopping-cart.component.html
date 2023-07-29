@@ -1,0 +1,22 @@
+<!-- shopping-cart.component.html -->
+
+<h2>Shopping Cart</h2>
+
+<div *ngIf="cartItems.length === 0">
+  <p>Your cart is empty.</p>
+</div>
+
+<div *ngIf="cartItems.length > 0">
+  <div *ngFor="let cartItem of cartItems" class="cart-item">
+    <img [src]="'assets/' + cartItem.product.image" alt="{{ cartItem.product.name }}">
+    <h3>{{ cartItem.product.name }}</h3>
+    <p>Price: ${{ cartItem.product.price }}</p>
+    <div>
+      <button (click)="removeItemFromCart(cartItem)">Remove</button>
+      <button (click)="decreaseQuantity(cartItem)">-</button>
+      <span>{{ cartItem.quantity }}</span>
+      <button (click)="increaseQuantity(cartItem)">+</button>
+    </div>
+  </div>
+  <p>Total: ${{ getTotalPrice() }}</p>
+</div>

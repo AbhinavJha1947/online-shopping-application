@@ -1,0 +1,12 @@
+/* product-listing.component.css */
+
+.product-card {
+    text-align: center;
+  }
+  
+  .product-card img {
+    max-width: 200px; /* Set the maximum width of the image */
+    max-height: 150px; /* Set the maximum height of the image */
+    margin-bottom: 10px;
+  }
+  
