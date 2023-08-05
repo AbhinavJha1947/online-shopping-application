@@ -7,12 +7,34 @@
     <!--<img [src]="'assets/' + product.image" alt="{{ product.name }}"> -->
     <h3>{{ product.name }}</h3>
     <p>Price: ${{ product.price }}</p>
-    <button (click)="addToCart(product)">Add to Cart</button> <!-- Make sure this button is present -->
-    <button (click)="showProductDetails(product.id)">Show Details</button>
+    <!-- <button (click)="addToCart(product)">Add to Cart</button> 
+    <button (click)="showProductDetails(product.id)">Show Details</button> -->
 
   </div>
 </div>
 
+<!-- Add the Reactive Forms filter and sort options -->
+<form [formGroup]="filterForm">
+  <label>Filter by Category:</label>
+  <select formControlName="category">
+    <option value="all">All</option>
+    <option value="category1">Category 1</option>
+    <option value="category2">Category 2</option>
+    <!-- Add more category options as needed -->
+  </select>
+  
+  <label>Sort by:</label>
+  <select formControlName="sort">
+    <option value="priceAscending">Price (Low to High)</option>
+    <option value="priceDescending">Price (High to Low)</option>
+    <!-- Add more sorting options as needed -->
+  </select>
+</form>
+
+<!-- Display the filtered and sorted products -->
+<div *ngFor="let product of products">
+  <app-product-item [product]="product"></app-product-item>
+</div>
 
 
   

@@ -11,6 +11,10 @@ import { CheckoutPageComponent } from './checkout-page/checkout-page.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { UserLoginComponent } from './user-login/user-login.component'; // Import the FormsModule
+import { CartService } from './cart.service'; // Make sure CartService is imported
+import { ProductService } from './product.service';
+import { ProductItemComponent } from './product-item/product-item.component'; // Make sure ProductService is imported
+import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
 
 @NgModule({
   declarations: [
@@ -22,14 +26,16 @@ import { UserLoginComponent } from './user-login/user-login.component'; // Impor
     CheckoutPageComponent,
     OrderConfirmationComponent,
     UserRegistrationComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    ProductItemComponent
   ],
   imports: [
     BrowserModule,
     FormsModule ,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ProductService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,8 @@
+<p>product-item works!</p>
+<!-- Display product details and emit the selected product when clicked -->
+<div (click)="onProductClick()">
+    <h3>{{ product?.name }}</h3>
+    <img [src]="product?.image" alt="{{ product?.name }}">
+    <p>Price: ${{ product?.price }}</p>
+  </div>
+  

@@ -1,8 +1,8 @@
-
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Product } from '../product.model';
+import { ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from '../product.service';
+import { Product } from '../product.model';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -11,24 +11,27 @@ import { ProductService } from '../product.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: Product | undefined;
-  router: any;
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
-  ) { }
+    private productService: ProductService,
+    private cartService: CartService
+  ) {}
 
-  ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const productId = Number(params.get('id'));
-      this.product = this.productService.getProductById(productId);
-
-      // If the product is not found, you can handle the error here
-      if (!this.product) {
-        // For example, redirect to a 404 page
-        this.router.navigateByUrl('/404-page-not-found');
-      }
+  ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      const productId = +params['id'];
+      this.getProductDetails(productId);
     });
+  }
 
+  getProductDetails(productId: number) {
+    this.productService.getProductById(productId).subscribe((product) => {
+      this.product = product!;
+    });
+  }
+
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
   }
 }

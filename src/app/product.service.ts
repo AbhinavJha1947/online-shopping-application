@@ -2,11 +2,15 @@
 import { Injectable } from '@angular/core';
 import { Product } from './product.model';
 import { CartItem } from './cart-item.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  getProductsByCategory(category: string) {
+    throw new Error('Method not implemented.');
+  }
   private products: Product[] = [
     {
       id: 1,
@@ -43,18 +47,11 @@ export class ProductService {
       image: 'p5.jpg',
       description: 'This is the description of Product 1.'
     },
-    // {
-    //   id: 6,
-    //   name: 'Product 6',
-    //   price: 15,
-    //   image: '"C:\Users\admin\Downloads\pexels-avichal-lodhi-2819088.jpg"',
-    //   description: 'This is the description of Product 1.'
-    // },
 
-    // Add more products here...
   ];
    
   private cartItems: CartItem[] = [];
+  getAllProducts: any;
 
   addToCart(product: Product, quantity: number = 1): void {
     const existingCartItem = this.cartItems.find(item => item.product.id === product.id);
@@ -81,7 +78,18 @@ export class ProductService {
     return this.products;
   }
 
-  getProductById(id: number): Product | undefined {
-    return this.products.find(product => product.id === id);
+  getProductById(productId: number): Observable<Product> {
+    const product = this.products.find((p) => p.id === productId);
+    return of(product || this.createEmptyProduct());
   }
+  private createEmptyProduct(): Product {
+    return {
+      id: 0,
+      name: 'Product not found',
+      price: 0,
+      description: 'This product does not exist.',
+      image: 'default-image.jpg'
+    };
+  }
+
 }

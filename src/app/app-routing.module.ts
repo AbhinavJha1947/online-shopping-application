@@ -7,6 +7,13 @@ import { CheckoutPageComponent } from './checkout-page/checkout-page.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { AuthGuard } from './/auth.guard';
+// import { CanActivateChildGuard } from './guards/can-activate-child.guard';
+// import { CartNotEmptyGuard } from './guards/cart-not-empty.guard';
+// import { LoginComponent } from './login/login.component';
+// import { CartComponent } from './cart/cart.component';
+// import { UserProfileComponent } from './user-profile/user-profile.component';
+// import { OrderHistoryComponent } from './order-history/order-history.component';
 
 
 
@@ -20,7 +27,13 @@ const routes: Routes = [
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'register', component: UserRegistrationComponent },
   { path: 'login', component: UserLoginComponent },
-
+  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  //{ path: 'login', component: LoginComponent },
+  { path: 'products', component: ProductListingComponent },
+  { path: 'products/:id', component: ProductDetailsComponent },
+  //{ path: 'cart', component: CartComponent },
+  // Protected routes (require authentication)
+  
 ];
 
 @NgModule({
